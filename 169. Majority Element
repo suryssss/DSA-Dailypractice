@@ -20,16 +20,16 @@ n == nums.length
 #Solution
 
  val=len(nums)//2
-        hm={}
-        for i in nums:
-            if i in hm:
-                hm[i]+=1
-            else:
-                hm[i]=1
-        for i,j in hm.items():
-            if j>val:
-                return i
-                break
+ hm={}
+ for i in nums:
+     if i in hm:
+        hm[i]+=1
+     else:
+        hm[i]=1
+for i,j in hm.items():
+      if j>val:
+         return i
+         break
 
 
 Time Complexity:O(n)
