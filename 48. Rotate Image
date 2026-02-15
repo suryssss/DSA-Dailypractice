@@ -1,0 +1,25 @@
+You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
+
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [[7,4,1],[8,5,2],[9,6,3]]
+
+
+Optimal
+Intution:
+just do tranpose and reverse each row (memorize)
+
+solution:
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        n=len(matrix)
+        m=len(matrix[0])
+        for i in range(n):
+            for j in range(i+1,n):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+        for i in range(n):
+            matrix[i].reverse()
+        return matrix
+
+180 rotate: row reverse and col reverse
+270 rotate:transpose and col reverse
