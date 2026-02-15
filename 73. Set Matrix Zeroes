@@ -1,0 +1,65 @@
+Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
+
+Input: matrix = [[1,1,1],[1,0,1],[1,1,1]]
+Output: [[1,0,1],[0,0,0],[1,0,1]]
+
+Brute Force
+Intution:
+(simulation) just doing what hey said in the question iterating and checking for zeros if found change the entire row and column to int_max or min (bez if u cange them directly to 0 u'll making even others elements
+as  0 and coverting other elements to 0's ) then again iterate convert them to zeros
+
+solution:
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        int_max=float('inf')
+        def matrow(val):
+            for k in range(m):
+                if matrix[val][k]!=0 and matrix[val][k]!=int_max :
+                    matrix[val][k]=int_max=float('inf')
+        def matcol(val):
+            for k in range(n):
+                if matrix[k][val]!=0 and matrix[k][val]!=int_max :
+                    matrix[k][val]=int_max=float('inf')
+
+        n=len(matrix)
+        m=len(matrix[0])
+        for i in range(n):
+            for j in range(m):
+                if matrix[i][j]==0:
+                    matrow(i)
+                    matcol(j)
+
+        for i in range(n):
+            for j in range(m):
+                if matrix[i][j]==int_max:
+                    matrix[i][j]=0
+        return matrix
+
+Optimal
+Intution:
+take two arrays rowwise and colwise iterate over the matrix if u see a zero make the ith index in row and jth index in col as 1 continue. Again loop over the rows and cols if any of eiher row or col is 1 then
+change the matrix[i][j] to 0
+
+Solution:
+
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        n=len(matrix)
+        m=len(matrix[0])
+        col=[0]*m
+        row=[0]*n
+
+        for i in range(n):
+            for j in range(m):
+                if matrix[i][j]==0:
+                    col[j]=1
+                    row[i]=1
+
+        for i in range(len(row)):
+            for j in range(len(col)):
+                if row[i]==1 or col[j]==1:
+                    matrix[i][j]=0
+        return matrix
+
+
+'''There is another solution with space O(1) need to learn 
