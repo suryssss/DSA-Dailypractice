@@ -1,0 +1,31 @@
+You are given an array of intervals arr[][], where each interval is represented by two integers [start, end] (inclusive). Return the maximum number of intervals that overlap at any point in time.
+
+Input: arr[][] = [[1, 2], [2, 4], [3, 6]]
+Output: 2
+Explanation: The maximum overlapping intervals are 2(between (1, 2) and (2, 4) or between (2, 4) and (3, 6))
+
+Intution:
+take two arrays as start as end sorted one iterate over them compare the start[i] and end[j] if u get an interval increase the count and calculate max_overlap if not decrement the count
+
+Solution:
+
+    def overlapInt(self, arr):
+        # code here
+        n=len(arr)
+        start=sorted(i[0] for i in arr)
+        end=sorted(i[1] for i in arr)
+        
+        i=0
+        j=0
+        curr=0
+        max_overlap=0
+        
+        while i<n and j<n:
+            if start[i]<=end[j]:
+                curr+=1
+                max_overlap=max(curr,max_overlap)
+                i+=1
+            else:
+                curr-=1
+                j+=1
+        return max_overlap
